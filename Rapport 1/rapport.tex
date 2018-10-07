@@ -94,7 +94,7 @@
 
 \begin{abstract}
 In this project we used three different linear regression methods to approximate the Franke Function and some real world terrain data. 
-The methods we use are the Ordinary Least Square, Ridge, and Lasso. 
+The methods we use are the Ordinary Least Square, Ridge, and Lasso regression. 
 For each we use a 10-fold cross validation to pick the best model and then we preform statistical tests to ascertain the validity of our models. 
 None of them are particularly good. 
 \end{abstract}
@@ -102,9 +102,59 @@ None of them are particularly good.
 
 \section{Introduction}
 
-nlag
+This project is concerned with the following problem: Suppose we know the values of a function $f$ on a set of points $\{x_1, x_2, \ldots, x_n\}$, can we then predict $f(x)$ for any $x$?
+In full generality this is plainly impossible (though see \cite{ht:choice}).
+But if we allow ourselves to believe that the function $f$ is not too erratic, then we can certainly try to notice a pattern and use that for our predictions.
+Like in an IQ test.
+In fact we would also like to find a pattern even if we do not know $f(x_i)$ exactly, but only with some small noise thrown in.
+This corresponds more closely to a real world measurement scenario. 
 
-\section{Linear Regression Methods}
+Linear Regression methods are a mathematical rigorous way of noticing these types of patterns.
+The methods produce a so-called parameter vector from the know values of $f$ and then produce a prediction functions that is linear in this parameter vector, and not in the inputs $x$. 
+A typical usage is to try to find a polynomial approximation of $f$. 
+If we have $n$ data points $\{x_1, x_2, \ldots, x_n\}$ and we know the function values $f(x_i)$ one can perfectly fit a $n-1$ degree polynomial to this data.
+This will usually be the wrong approach. 
+Suppose we measure the following. 
+
+\begin{center}
+\begin{tabular}{l|cccc}
+x & 1 & 2 & 3 & 4\\
+\hline
+f(x) & 1.1 & 1.9 & 3.1 & 3.9
+\end{tabular} 
+\end{center} 
+
+Any sane person would predict that $f(5)$ ought to be almost $5$ (they might even predict that it is $5.1$). 
+Figure 1 shows a what happens when we try to predict from this using a basic linear regression method to get either a first or third degree polynomial.
+
+\begin{figure}[H]
+\caption{An example of over fitting.}
+\centering
+\includegraphics[scale=0.5]{overfitting.png}
+\end{figure}
+
+The green line shows the third degree polynomial, the red line is the first degree polynomial and the blue dots are the observations. 
+We see that the third degree polynomial predicts that $f(5) \approx 3.5$. 
+
+To avoid this type of problem one has to validate the model used.
+A simple test that would have worked here is to try to predict using only some of the observation, and then test against the remaining observations.
+In general we use sophisticated test, in such test is called cross validation which we will discuss below.   
+
+In this report we will discuss three specific linear regression methods: Ordinary Least Squares, Ridge, and Lasso regression.
+We will talk about the weakness and strengths of each one. 
+We will apply them to the so-called Franke function and some real world terrain data and discuss how successful they are, as determined by statistical tests.
+It will unfortunately transpire that neither of our methods are particularly good for predicting the behaviour of Franke function or the terrain data.
+ 
+All reference to code refer to the jupyter notebook \texttt{Projekt 1.ipynb}.
+The report is structured as follows. 
+In Section \ref{sec:lrm} we will introduce, more rigorously, linear regression and discuss the three specific methods we use. 
+We will touch on their theory and how I have coded them.
+In Section \ref{sec:selection} we turn our attention to model selection and validation, looking at cross validation and the bias and variance of a model. 
+Again there is brief discussion of the theory and comments on the implementation. 
+In sections \ref{sec:franke} and \ref{sec:terrain} we look at how our models work on the Franke function and the terrain data. 
+Finally in Section \ref{sec:conclusion} we summarize our findings. 
+
+\section{Linear Regression Methods} \label{sec:lrm}
  
 Broadly speaking the idea of linear regression is as follows.
 We are given $N$ data points each represented by a row vector $\vect{x_i}$ of some size $p$ and the corresponding real measurements $z_1, z_2, \ldots z_N$. 
@@ -227,7 +277,7 @@ Because of that $\funcname{predict}$ is just as straight forward as it was in th
 In both \funcname{train} and \funcname{predict} we must delete the column of $1$'s coming from \funcname{polymatrix} as the intercept is treated different from all other $\beta$ parameters. 
 As for OLS we also have some extra functions that are used later to print and extract parameters. 
 
-\subsection{Lasso Regression}  
+\subsection{Lasso Regression} \label{sec:selection}
 
 Lasso regression is similar to Ridge regression in that it uses a parameter $\lambda$ to lessen the variance of the computed $\beta_i$, however unlike Ridge and OLS it is much more likely to set a given $\beta_i$ equal to $0$. 
 We will see this a lot later. 
@@ -245,7 +295,7 @@ It is in all respects the same as how \funcname{polynomialOLS} used the class \f
 
 \section{Model Selection and Verification}
 
-\subsection{cross validation}
+\subsection{Cross Validation}
 
 To choose between different models I used cross validation, implemented in the fifth code block of the jupyter notebook. 
 I build the code on the theory described in Section 7.10.1 of \cite{htf:esl}. 
@@ -321,7 +371,7 @@ This time instead of recording prediction errors I record the coefficient vector
 A reasonable critic of both methods is that I should perhaps repeat the k-fold process a number of times to get more $\vect{\beta}$s or point predictions to get more accurate variances.
 However, if 10 folds works for cross prediction it probably works fine for these.
 
-\section{Results on the Franke Function (parts a,b,c)}
+\section{Results on the Franke Function (parts a,b,c)} \label{sec:franke}
 
 The code blocks 9-17 looks at the Franke Function and the different linear regression methods. 
 In block 9 the data is setup, I pick 1000 pairs $(x,y)$ in $[0,1]^2$ and record their real values with a little added noise. 
@@ -381,9 +431,9 @@ The variance for all the $\beta_i$ are similarly small so we will get similar co
 Looking at all the data, it seems that the Ridge regression giving a fifth degree polynomial with a $\lambda$ parameter of $0.1$ gives the best model. 
 While it has a worse $R^2$ score than the OLS model, its much more stable behaviour gives it the nudge. 
 
-\section{Results for Terrain Data}
+\section{Results for Terrain Data} \label{sec:terrain}
 
-For the terrain data I chose a mountanes area just outside of Sydney called the Blue Mountains. 
+For the terrain data I chose a picturesque mountain range just outside of Sydney called the Blue Mountains. 
 I again used cross validation to select the model with the smallest predicted error (code block 68), and I got Ridge regression for a third degree polynomial with a $\lambda$ parameter of $0.5$.
 Running statistical tests as above, I got the following.
 
@@ -405,7 +455,7 @@ For a final test, I plotted a 500 by 500 corner of the map, and the same corner 
 Looking at it, we can see that the model picks up the very bright spot in the lower left corner and sort of picks up the dark lines running along the X-axis around Y-coordinate 100--200. 
 In a way the predicted map looks like a very blurry version of the real map. 
 
-\section{Conclusion}
+\section{Conclusion} \label{sec:conclusion}
 
 From the modelling of the Franke function and the terrain date, we see that the linear regression methods acts as the theory predicts.
 The Ridge and Lasso regressions are more stable than the Ordinary Least Squares regression and Lasso is much more likely to set a given $\beta_i$ to $0$. 

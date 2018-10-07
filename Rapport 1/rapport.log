@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6700 64-bit) (preloaded format=pdflatex 2018.6.14)  7 OCT 2018 20:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6700 64-bit) (preloaded format=pdflatex 2018.6.14)  7 OCT 2018 22:17
 entering extended mode
 **./rapport.tex
 (rapport.tex
@@ -570,14 +570,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
 (Font)              Font shape `U/lasy/m/n' tried instead on input line 94.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 110.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 105.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 110.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 105.
+<overfitting.png, id=1, 383.4325pt x 266.9975pt>
+File: overfitting.png Graphic file (type png)
+<use overfitting.png>
+Package pdftex.def Info: overfitting.png  used on input line 133.
+(pdftex.def)             Requested size: 191.71577pt x 133.49841pt.
 [1
 
 
-{C:/Users/Admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-[3] [4] [5]
+{C:/Users/Admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2 <./overf
+itting.png>] [3] [4] [5] [6]
 \openout5 = `rapport.pyg'.
 
 runsystem(pygmentize -S default -f latex -P commandprefix=PYG > rapport.out.pyg
@@ -591,25 +596,26 @@ out.pyg)...executed.
 runsystem(pygmentize -l python -f latex -P commandprefix=PYG -F tokenmerge -o r
 apport.out.pyg rapport.pyg)...executed.
 
- (rapport.out.pyg) [6] [7]
-Overfull \hbox (12.73697pt too wide) in paragraph at lines 390--396
+
+(rapport.out.pyg) [7] [8] [9]
+Overfull \hbox (12.73697pt too wide) in paragraph at lines 440--446
 [][] 
  []
 
-[8] [9] (rapport.bbl) [10] (rapport.aux)
+[10] (rapport.bbl) [11] (rapport.aux)
 runsystem(del rapport.pyg)...executed.
 
 runsystem(del rapport.out.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 10468 strings out of 492973
- 209615 string characters out of 3126692
- 446290 words of memory out of 3000000
- 14148 multiletter control sequences out of 15000+200000
+ 10482 strings out of 492973
+ 209814 string characters out of 3126692
+ 447359 words of memory out of 3000000
+ 14160 multiletter control sequences out of 15000+200000
  20056 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 47i,20n,67p,9089b,459s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 47i,20n,67p,9089b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Users/Admin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/cm/cmbx8.pfb><C:/Users/Admin/AppData/Local/Programs/MiKTeX 2.9/fo
@@ -631,9 +637,9 @@ s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Admin/AppData/Local
 /Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Admin/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rapport.pdf (10 pages, 228284 bytes).
+Output written on rapport.pdf (11 pages, 244668 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
+ 113 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

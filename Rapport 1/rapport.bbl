@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Hardin and Taylor, 2008]{ht:choice}
+Hardin, C.~S. and Taylor, A.~D. (2008).
+\newblock A peculiar connection between the axiom of choice and predicting the
+  future.
+\newblock {\em Amer. Math. Monthly}, 115(2):91--96.
+
 \bibitem[Hastie et~al., 2009]{htf:esl}
 Hastie, T., Tibshirani, R., and Friedman, J. (2009).
 \newblock {\em The elements of statistical learning}.
