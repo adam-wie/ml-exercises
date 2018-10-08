@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6700 64-bit) (preloaded format=pdflatex 2018.6.14)  7 OCT 2018 22:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6700 64-bit) (preloaded format=pdflatex 2018.6.14)  8 OCT 2018 11:22
 entering extended mode
 **./rapport.tex
 (rapport.tex
@@ -304,7 +304,15 @@ Package scrlayer-scrpage Info: deactivating warning for font element
 )
 Package scrlayer-scrpage Info: auto-selection of `pagestyleset=KOMA-Script'.
 
-("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minted\minted.sty"
+("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\framed\framed.sty"
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip64
+\fb@frw=\dimen116
+\fb@frh=\dimen117
+\FrameRule=\dimen118
+\FrameSep=\dimen119
+) ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minted\minted.st
+y"
 Package: minted 2017/07/19 v2.5 Yet another Pygments shim for LaTeX
 
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions
@@ -372,36 +380,36 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count108
 \output=\toks31
 \linenoprevgraf=\count109
-\linenumbersep=\dimen116
-\linenumberwidth=\dimen117
+\linenumbersep=\dimen120
+\linenumberwidth=\dimen121
 \c@linenumber=\count110
 \c@pagewiselinenumber=\count111
 \c@LN@truepage=\count112
 \c@internallinenumber=\count113
 \c@internallinenumbers=\count114
-\quotelinenumbersep=\dimen118
-\bframerule=\dimen119
-\bframesep=\dimen120
+\quotelinenumbersep=\dimen122
+\bframerule=\dimen123
+\bframesep=\dimen124
 \bframebox=\box32
 LaTeX Info: Redefining \\ on input line 3056.
 )
 \c@FV@TrueTabGroupLevel=\count115
 \c@FV@TrueTabCounter=\count116
 \FV@TabBox@Group=\box33
-\FV@TmpLength=\skip64
+\FV@TmpLength=\skip65
 \c@FV@HighlightLinesStart=\count117
 \c@FV@HighlightLinesStop=\count118
 \FV@LoopCount=\count119
 \FV@NCharsBox=\box34
-\FV@BreakIndent=\dimen121
+\FV@BreakIndent=\dimen125
 \FV@BreakIndentNChars=\count120
-\FV@BreakSymbolSepLeft=\dimen122
+\FV@BreakSymbolSepLeft=\dimen126
 \FV@BreakSymbolSepLeftNChars=\count121
-\FV@BreakSymbolSepRight=\dimen123
+\FV@BreakSymbolSepRight=\dimen127
 \FV@BreakSymbolSepRightNChars=\count122
-\FV@BreakSymbolIndentLeft=\dimen124
+\FV@BreakSymbolIndentLeft=\dimen128
 \FV@BreakSymbolIndentLeftNChars=\count123
-\FV@BreakSymbolIndentRight=\dimen125
+\FV@BreakSymbolIndentRight=\dimen129
 \FV@BreakSymbolIndentRightNChars=\count124
 \c@FancyVerbLineBreakLast=\count125
 \FV@LineBox=\box35
@@ -410,14 +418,14 @@ LaTeX Info: Redefining \\ on input line 3056.
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count126
 \calc@Bcount=\count127
-\calc@Adimen=\dimen126
-\calc@Bdimen=\dimen127
-\calc@Askip=\skip65
-\calc@Bskip=\skip66
+\calc@Adimen=\dimen130
+\calc@Bdimen=\dimen131
+\calc@Askip=\skip66
+\calc@Bskip=\skip67
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count128
-\calc@Cskip=\skip67
+\calc@Cskip=\skip68
 )
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\shellesc.sty
 "
@@ -456,14 +464,7 @@ tex"
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
-("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\framed\framed.sty"
-Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip68
-\fb@frw=\dimen128
-\fb@frh=\dimen129
-\FrameRule=\dimen130
-\FrameSep=\dimen131
-) ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty"
+("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count131
 \float@exts=\toks32
@@ -478,8 +479,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@minted@pygmentizecounter=\count133
 \@float@every@listing=\toks34
 \c@listing=\count134
-)
-("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+) ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xcolor\xcolor.st
+y"
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color
@@ -506,18 +507,18 @@ runsystem(del rapport.aex)...executed.
  (rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
 
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
 ii"
@@ -553,36 +554,42 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 94.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 95.
 
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 94.
+LaTeX Font Info:    Try loading font information for U+msa on input line 95.
 
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 94.
+LaTeX Font Info:    Try loading font information for U+msb on input line 95.
 ("C:\Users\Admin\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 94.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 95.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 105.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 106.
 LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6> not available
-(Font)              Font shape `U/lasy/m/n' tried instead on input line 105.
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 106.
 <overfitting.png, id=1, 383.4325pt x 266.9975pt>
 File: overfitting.png Graphic file (type png)
 <use overfitting.png>
-Package pdftex.def Info: overfitting.png  used on input line 133.
+Package pdftex.def Info: overfitting.png  used on input line 135.
 (pdftex.def)             Requested size: 191.71577pt x 133.49841pt.
 [1
 
 
 {C:/Users/Admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2 <./overf
-itting.png>] [3] [4] [5] [6]
+itting.png>]
+Overfull \hbox (17.00635pt too wide) in paragraph at lines 212--214
+\OT1/cmr/m/n/10.95 In the Or-di-nary Least Square (OLS) method (de-scribed in S
+ec-tion 3.2 of [[]])
+ []
+
+[3] [4] [5] [6]
 \openout5 = `rapport.pyg'.
 
 runsystem(pygmentize -S default -f latex -P commandprefix=PYG > rapport.out.pyg
@@ -596,23 +603,33 @@ out.pyg)...executed.
 runsystem(pygmentize -l python -f latex -P commandprefix=PYG -F tokenmerge -o r
 apport.out.pyg rapport.pyg)...executed.
 
-
-(rapport.out.pyg) [7] [8] [9]
-Overfull \hbox (12.73697pt too wide) in paragraph at lines 440--446
-[][] 
+ (rapport.out.pyg) [7]
+[8] [9]
+Overfull \hbox (1.78694pt too wide) in paragraph at lines 462--468
+ [] 
  []
 
-[10] (rapport.bbl) [11] (rapport.aux)
+<bmreal.png, id=51, 282.05376pt x 279.0425pt>
+File: bmreal.png Graphic file (type png)
+<use bmreal.png>
+Package pdftex.def Info: bmreal.png  used on input line 483.
+(pdftex.def)             Requested size: 141.02652pt x 139.5209pt.
+<bmpred.png, id=52, 282.05376pt x 279.0425pt>
+File: bmpred.png Graphic file (type png)
+<use bmpred.png>
+Package pdftex.def Info: bmpred.png  used on input line 484.
+(pdftex.def)             Requested size: 141.02652pt x 139.5209pt.
+[10] (rapport.bbl) [11 <./bmreal.png> <./bmpred.png>] (rapport.aux)
 runsystem(del rapport.pyg)...executed.
 
 runsystem(del rapport.out.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 10482 strings out of 492973
- 209814 string characters out of 3126692
- 447359 words of memory out of 3000000
- 14160 multiletter control sequences out of 15000+200000
+ 10498 strings out of 492973
+ 210022 string characters out of 3126692
+ 448402 words of memory out of 3000000
+ 14174 multiletter control sequences out of 15000+200000
  20056 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  47i,20n,67p,9089b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -637,9 +654,9 @@ s/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Admin/AppData/Local/Programs/Mi
 KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Admin/AppData/Local
 /Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/Admin/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rapport.pdf (11 pages, 244668 bytes).
+Output written on rapport.pdf (11 pages, 306780 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
+ 117 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

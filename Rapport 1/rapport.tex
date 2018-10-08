@@ -14,6 +14,7 @@
 \usepackage[pdftex]{graphicx}	
 \usepackage{scrlayer-scrpage} % page setup
 
+\usepackage{framed}
 \usepackage[cache=false]{minted} % for source code
 \usepackage{xcolor}
 %set page header
@@ -94,7 +95,7 @@
 
 \begin{abstract}
 In this project we used three different linear regression methods to approximate the Franke Function and some real world terrain data. 
-The methods we use are the Ordinary Least Square, Ridge, and Lasso regression. 
+The methods we use are Ordinary Least Square, Ridge, and Lasso regression. 
 For each we use a 10-fold cross validation to pick the best model and then we preform statistical tests to ascertain the validity of our models. 
 None of them are particularly good. 
 \end{abstract}
@@ -109,8 +110,8 @@ Like in an IQ test.
 In fact we would also like to find a pattern even if we do not know $f(x_i)$ exactly, but only with some small noise thrown in.
 This corresponds more closely to a real world measurement scenario. 
 
-Linear Regression methods are a mathematical rigorous way of noticing these types of patterns.
-The methods produce a so-called parameter vector from the know values of $f$ and then produce a prediction functions that is linear in this parameter vector, and not in the inputs $x$. 
+Linear Regression methods are a mathematically rigorous way of noticing these types of patterns.
+The methods produce a so-called parameter vector from the know values of $f$ and then produce a prediction function that is linear in this parameter vector, and not in the inputs $x$. 
 A typical usage is to try to find a polynomial approximation of $f$. 
 If we have $n$ data points $\{x_1, x_2, \ldots, x_n\}$ and we know the function values $f(x_i)$ one can perfectly fit a $n-1$ degree polynomial to this data.
 This will usually be the wrong approach. 
@@ -125,33 +126,36 @@ f(x) & 1.1 & 1.9 & 3.1 & 3.9
 \end{center} 
 
 Any sane person would predict that $f(5)$ ought to be almost $5$ (they might even predict that it is $5.1$). 
-Figure 1 shows a what happens when we try to predict from this using a basic linear regression method to get either a first or third degree polynomial.
+Figure \ref{fig:overfitting} shows a what happens when we try to predict from this using a basic linear regression method to get either a first or third degree polynomial.
 
 \begin{figure}[H]
 \caption{An example of over fitting.}
+\label{fig:overfitting}
 \centering
 \includegraphics[scale=0.5]{overfitting.png}
 \end{figure}
 
 The green line shows the third degree polynomial, the red line is the first degree polynomial and the blue dots are the observations. 
 We see that the third degree polynomial predicts that $f(5) \approx 3.5$. 
-
 To avoid this type of problem one has to validate the model used.
 A simple test that would have worked here is to try to predict using only some of the observation, and then test against the remaining observations.
-In general we use sophisticated test, in such test is called cross validation which we will discuss below.   
+In general we use more sophisticated test, one such test is called cross validation and will be discussed later.
 
 In this report we will discuss three specific linear regression methods: Ordinary Least Squares, Ridge, and Lasso regression.
 We will talk about the weakness and strengths of each one. 
-We will apply them to the so-called Franke function and some real world terrain data and discuss how successful they are, as determined by statistical tests.
-It will unfortunately transpire that neither of our methods are particularly good for predicting the behaviour of Franke function or the terrain data.
- 
-All reference to code refer to the jupyter notebook \texttt{Projekt 1.ipynb}.
+We will apply them to the so-called Franke Function and some real world terrain data and discuss how successful they are, as determined by statistical tests.
+It will unfortunately transpire that neither of our methods are particularly good for predicting the behaviour of Franke Function or the terrain data.
+
+\begin{framed}
+All the code I have implemented can be found in the jupyter notebook \texttt{Projekt 1.ipynb} at \url{https://github.com/adam-wie/ml-exercises}.
+\end{framed}
+
 The report is structured as follows. 
 In Section \ref{sec:lrm} we will introduce, more rigorously, linear regression and discuss the three specific methods we use. 
 We will touch on their theory and how I have coded them.
 In Section \ref{sec:selection} we turn our attention to model selection and validation, looking at cross validation and the bias and variance of a model. 
 Again there is brief discussion of the theory and comments on the implementation. 
-In sections \ref{sec:franke} and \ref{sec:terrain} we look at how our models work on the Franke function and the terrain data. 
+In sections \ref{sec:franke} and \ref{sec:terrain} we look at how our models work on the Franke Function and the terrain data. 
 Finally in Section \ref{sec:conclusion} we summarize our findings. 
 
 \section{Linear Regression Methods} \label{sec:lrm}
@@ -170,8 +174,8 @@ Then we try to find a column vector $\vect{\beta}$ such that
 	\begin{pmatrix} z_1 \\ z_2 \\ \vdots \\ z_n \end{pmatrix}.	
 \]
 
-The goal is choose $\vect{\beta}$ such that the approximate equality holds as best as possible. 
-Exactly how we measure what it means for two vectors to be approximately equal will define the different regression methods. 
+The goal is to choose $\vect{\beta}$ such that the approximate equality holds as best as possible. 
+Exactly how we measure what it means for two vectors to be approximately equal and if we put on other constraints will define the different regression methods. 
 
 In our case we are interested in finding a polynomial that approximates a function $f$ of two variables.
 When we want a polynomial of degree $d$ we will first find $N$ points in the plane $(x_1, y_1), (x_2, y_2), \ldots (x_N, y_N)$ and record the values $z_1 = f(x_1, y_1), z_2 = f(x_2, y_2) \ldots z_N = f(x_N, y_N)$.
@@ -205,7 +209,7 @@ It is all implemented in the third code block in the jupyter notebook, and in th
 
 \subsection{Ordinary Least Square Regression}
 
-In the Ordinary Least Square method (described in Section 3.2 of \cite{htf:esl}) we measure the approximate equality in equation (\ref{eq:linreg}) in 2-norm. 
+In the Ordinary Least Square (OLS) method (described in Section 3.2 of \cite{htf:esl}) we measure the approximate equality in equation (\ref{eq:linreg}) in 2-norm. 
 That is we are looking for a $\vect{\beta}$ the minimizes 
 \[
 	\| X \vect{\beta} - \vect{z} \|_2,
@@ -247,25 +251,24 @@ For ridge regression we need a parameter $\lambda > 0$ in addition to the input 
 The method is similar to OLS, but the inclusion of $\lambda$ is used to reduce the variance of the computed $\vect{\beta}$ which in OLS can change a lot with small changes of inputs.    
 When choosing $\beta$ we again want to minimize the 2-norm of $\vect{z} - X\vect{\beta}$ but at the same time also the expression 
 \[
-	\lambda \sum_{i=1}^p \beta_i^2 \quad \text{where} \quad  \vect{\beta} = \begin{pmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{pmatrix}.	     
+	\lambda \sum_{i=1}^p \beta_i^2 \quad \text{where} \quad  \vect{\beta} = \begin{pmatrix}\beta_0 \\ \beta_1 \\ \vdots \\ \beta_{p-1} \end{pmatrix}.	     
 \]
 Note that $\beta_0$ is not included, that is we don't penalize the constant term of our polynomial. 
 Like for the OLS case there is an explicit formula for $\vect{\beta}$.
-For this, we do not include the column of $1$'s in the matrix $X$ and we assume that each column of $X$ has been centered (i.e. has mean $0$), then by equation (3.44) in \cite{htf:esl}:
+For this, we do not include the column of $1$'s in the matrix $X$ and we assume that each column of $X$ and $\vect{z}$ are centered (i.e. has mean $0$), then by equation (3.44) in \cite{htf:esl}:
 \begin{equation} \label{eq:ridgebeta}
-	\vect{\beta} = \left(X^T X + \lambda I \right)^{-1} X^T y. 
+	\vect{\beta} = \left(X^T X + \lambda I \right)^{-1} X^T \vect{z}. 
 \end{equation}
-This only gives the $\beta_1, \beta_2, \ldots, \beta_p$. 
-We set $\beta_0$ to be the mean of $\vect{z}$.
+This only gives the $\beta_1, \beta_2, \ldots, \beta_{p-1}$. 
 
-If we do not assume that $X$ is centered we let $\bar{x}_i$ be the mean of the $i$'th column of $X$, and replace $X$ with the matrix $(x_{ij} - \bar{x}_j)_{i,j}$. 
-Following programming conventions we will still call this matrix $X$.
-We still use equation (\ref{eq:ridgebeta}) to compute the $\beta_1, \beta_2 \ldots, \beta_p$, however we put
+If we do not assume that $X$ is centered we let $\bar{x}_i$ be the mean of the $i$'th column of $X$ and let $\bar{z}$ be the mean of $\vect{z}$.
+Then we replace $X$ with the matrix $(x_{ij} - \bar{x}_j)_{i,j}$ and $\vect{z}$ with $(z_i - \bar{z})$. 
+Following programming conventions we will still call them $X$ and $\vect{z}$.
+We still use equation (\ref{eq:ridgebeta}) to compute the $\beta_1, \beta_2 \ldots, \beta_{p-1}$, however we put
 \begin{equation} \label{eq:ridgeintercept}
-	\beta_0 = E(\vect{z}) - \begin{pmatrix} \bar{x}_1 & \bar{x}_2 & \cdots & \bar{x}_p \end{pmatrix} \begin{pmatrix} \beta_1 \\ \beta_2 \\ \vdots \\ \beta_p \end{pmatrix},
+	\beta_0 = \bar{z} - \begin{pmatrix} \bar{x}_1 & \bar{x}_2 & \cdots & \bar{x}_{p-1} \end{pmatrix} \begin{pmatrix} \beta_1 \\ \beta_2 \\ \vdots \\ \beta_{p-1} \end{pmatrix},
 \end{equation}
-where $E(\vect{z})$ denote the mean of $\vect{z}$. 
-The term we subtract can be thought of as retransforming the intercept out of the assumption the columns are centered. 
+The term we subtract can be thought of as retransforming the intercept out of the assumption that the columns are centered. 
 
 In the code the class \funcname{polynomialRidge} implements Ridge regression. 
 To initiate an instance of this class one needs to give the degree of the polynomial we want to approximate by, and the parameter $\lambda$. 
@@ -280,7 +283,7 @@ As for OLS we also have some extra functions that are used later to print and ex
 \subsection{Lasso Regression} \label{sec:selection}
 
 Lasso regression is similar to Ridge regression in that it uses a parameter $\lambda$ to lessen the variance of the computed $\beta_i$, however unlike Ridge and OLS it is much more likely to set a given $\beta_i$ equal to $0$. 
-We will see this a lot later. 
+We will see this in action later. 
 The theory of Lasso regression is in Section 3.4.2 of \cite{htf:esl}. 
 Like in Ridge regression we try to minimize not only $\|\vect{z} - X \vect{\beta}\|_2$ but at the same time also an extra term, which in the Lasso case is  
 \[
@@ -291,7 +294,7 @@ Here there is no closed form expression for $\vect{\beta}$.
 
 The implementation of Lasso regression is in the class \funcname{polynomialLasso}. 
 We use sci-kit learns Lasso regression functionality and \funcname{polynomialLasso} just acts as a wrapper that takes care to transform the input appropriately. 
-It is in all respects the same as how \funcname{polynomialOLS} used the class \funcname{myOLS}.
+In all respects it is the same as how \funcname{polynomialOLS} used the class \funcname{myOLS}.
 
 \section{Model Selection and Verification}
 
@@ -299,7 +302,7 @@ It is in all respects the same as how \funcname{polynomialOLS} used the class \f
 
 To choose between different models I used cross validation, implemented in the fifth code block of the jupyter notebook. 
 I build the code on the theory described in Section 7.10.1 of \cite{htf:esl}. 
-In the optimal situation where we have easy access to lots of data, we would split our data in to three parts, one part for training or models, one part for used to decide between models, and then a final part to test the reliability of our chosen model. 
+In the optimal situation where we have easy access to lots of data, we would split our data in to three parts, one part for training our models, one part for used to decide between models, and then a final part to test the reliability of our chosen model. 
 We are actually in this situation, but will pretend we are not. 
 
 The purpose of cross validation is to not keep a partition of the data specifically for validation, and instead use the training data for validation. 
@@ -312,20 +315,20 @@ In symbols
 	\{1,2,\ldots, N\} = \bigsqcup_{j=1}^k A_j.
 \]  
 For each $j$ we train our model $M$ on $\{1,2,\ldots, N\} \setminus A_j$ and call the corresponding prediction function $f_j$. 
-Now we estimate the square error this model will lead to on an unseen data point, denoted $cv$, by 
+Now we estimate the square error the model will lead to on an unseen data point, denoted $cv$, by 
 \[
 	cv = \frac{1}{N} \sum_{j=1}^k \sum_{i \in A_j} (f_j(\vect{x}_i) - z_i)^2. 
 \]
 Note that the prediction of $\vect{x}_i$ is done by a model not trained on $\vect{x}_i$.
-In case $k$ even divides $N$ so that all the $A_j$ are of size $N/k$ we can write this as 
+In case $k$ evenly divides $N$ so that all the $A_j$ are of size $N/k$ we can write this as 
 \[
 	cv = \frac{1}{k} \sum_{j=1}^k \left[ \frac{1}{|A_j|} \sum_{i \in A_j} (f_j(\vect{x}_i) - z_i)^2 \right].
 \]
-Here the terms enclosed in $[\cdot]$ is just the mean squared error the model $M$ makes when trained on $\{1,2,\ldots, N\} \setminus A_j$ and then tested against $A_j$.
+Here the terms enclosed in $[\cdot]$ is just the mean squared error the model $M$ makes when trained on $\{1,2,\ldots, N\} \setminus A_j$ and tested against $A_j$.
 So we can think of the cross validation error estimate as an average of mean squared errors. 
 
 Obviously different choices of $k$ will lead to different estimated errors. 
-So the choice of $k$ seems more art than science, but apparently $k=10$ is an established best practise.
+The choice of $k$ seems more art than science, but apparently $k=10$ is an established best practise.
 
 In the code I have implemented a function \funcname{cross{\_}validation} to do cross validation. 
 It takes 4 arguments, the number of folds \varname{k}, a two column matrix \varname{XY} of input data, a column vector \varname{z} or true values, and a model \varname{model} which has \funcname{train} and \funcname{predict} functions. 
@@ -333,20 +336,20 @@ Clearly these functions should work on the data points and true values.
 The idea is to use the regression methods I have implemented above as one of the models. 
 
 For the implementation we first record the length of the columns, $N$ say, in \varname{XY} and then use numpy functions to partition $\{1,2,\ldots, N\}$ into \varname{k} sets. 
-We loop over the folds and use an indexing mask to pick out all the data not in the current fold, train the model on it, and record the squared differences between prediction from the current fold and the real data. 
+We loop over the folds and use an indexing mask to pick out all the data not in the current fold, train the model on it, and record the squared differences between predictions from the current fold and the real data. 
 Finally we return the average of all these squared errors. 
 
-Numpy contains a function called \funcname{cross\_ val\_ score} that I would have liked to compare my code to.
+Numpy contains a function called \funcname{cross\_val\_score} that I would have liked to compare my code to.
 However I couldn't get it to play well with my regression methods.
 The documentation for \funcname{cross\_val\_score} (\url{http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html}) says the estimator, what I called model, should implement a \funcname{fit} function. 
-But even if rename my \funcname{train} to \funcname{fit}, or indeed just add the line \mintinline{python}{self.fit = self.train} to the \funcname{\_\_init\_\_} of my classes, I still get errors asking for more functions to be implemented. 
+But even if I rename my \funcname{train} to \funcname{fit}, or indeed just add the line \mintinline{python}{self.fit = self.train} to the \funcname{\_\_init\_\_} of my classes, I still get errors asking for more functions to be implemented. 
 I chose not to track through the numpy documentation to figure out what exactly I needed to implement. 
 Instead, I am contended to note the the predicted errors seem somewhat close to the actual errors we get when testing against unseen data. 
 
 \subsection{Verification}
 
 Once a model is chosen, we want to see how stable and accurate it is. 
-To this end in the sixth code block of the jupyter notebook I have done basic implementations of mean squared error functions, $R^2$ score, and variance of the entries of vector. 
+To this end, in the sixth code block of the jupyter notebook, I have done basic implementations of mean squared error functions, $R^2$ score, and variance of the entries of a vector. 
 There are formulas for these which I just translated to numpy. 
 In the seventh code block they are tested against the native numpy functions and give the same results.
 
@@ -368,15 +371,20 @@ The theory of this is described in Section 7.3 of \cite{htf:esl}, but the implem
 The function \funcname{beta\_variance} is again build in a way very similar to \funcname{cross\_validation}. 
 This time instead of recording prediction errors I record the coefficient vector $\vect{\beta}_j$ of each training session, and then compute the variance of each entry. 
 
-A reasonable critic of both methods is that I should perhaps repeat the k-fold process a number of times to get more $\vect{\beta}$s or point predictions to get more accurate variances.
-However, if 10 folds works for cross prediction it probably works fine for these.
+A reasonable critique of both methods is that I should perhaps repeat the k-fold process a number of times to get more $\vect{\beta}$s or point predictions to get more accurate variances.
+However, if 10 folds works for cross prediction I reason that it will work fine for these too.
 
 \section{Results on the Franke Function (parts a,b,c)} \label{sec:franke}
 
 The code blocks 9-17 looks at the Franke Function and the different linear regression methods. 
 In block 9 the data is setup, I pick 1000 pairs $(x,y)$ in $[0,1]^2$ and record their real values with a little added noise. 
 I used cross validation for each regression method and picked the model that gave the smallest predicted error.
+The results are summarized in Table \ref{tab:cvff}.
 
+\begin{table} 
+\caption{Method selection for the Franke Function.}
+\label{tab:cvff}
+\begin{center}
 \begin{tabular}{l|ccc}
 Regression Method & Polynomial degree & lambda parameter & Predicted error \\ 
 \hline
@@ -385,10 +393,17 @@ OLS & 5 &  & 0.044361 \\
 Ridge & 5 & 0.1 & 0.049839 \\ 
 Lasso & 4 & 0.1 & 0.124234
 \end{tabular} 
+\end{center}
+\end{table}
 
 For each of the best methods I computed the actual mean squared error and $R^2$ score against unseen data. 
 I also found the model vaiance and bias.
+These results are summarized in Table \ref{tab:varff}.
 
+\begin{table} 
+\caption{Model validation for the Franke Function.}
+\label{tab:varff}
+\begin{center}
 \begin{tabular}{l|cccc}
 Regression Method & Mean squared error & $R^2$ & bias$^2$ & model variance  \\ 
 \hline
@@ -397,6 +412,8 @@ OLS &  0.046539 & 0.636927 & 0.043213 & 0.000132 \\
 Ridge & 0.058986 & 0.539831 & 0.054887 & 0.000056 \\ 
 Lasso & 0.130758 & -0.020091 & 0.128723 & 0.000007
 \end{tabular} 
+\end{center}
+\end{table}
 
 On the positive side, we note that the actual mean squared errors are somewhat close to the predicted values.
 We also see that as expected the bias of OLS is smallest, then Ridge and then Lasso, and the variances go the other way.    
@@ -405,6 +422,7 @@ They have abysmal $R^2$ scores.
 In particular I am puzzled by the negative score for the Lasso regression, if one looks at the model, we will see that all parameters except the intercept are zero. 
 However, an $R^2$ score of $0$ is suppose to indicate that your model is no better then a hyperplane. 
 So the Lasso model I found manages to be a bad hyperplane model.  
+This explanation for this is that the average of the $z_i$ we trained on is different from the average of the unseen $z_i$.
 
 Let us now take closer look at coefficients (see code blocks 54, 57, and 66).
 The first thing that springs out, is that as noted that all the Lasso coefficients, except the intercept, are $0$ and that they have no variance. 
@@ -418,7 +436,7 @@ So we get a $95\%$ confidence interval (rounded off) for $\beta_4$ of
 \[
 	[-28.83 - 2 \times 8.30; -28.83 + 2 \times 8.30] = [-45.43; -12.23].  
 \]
-So I am $95\%$ sure the real value of $\beta_d$ is between $-45$ and $-12$.
+So I am $95\%$ sure the real value of $\beta_3$ is between $-45$ and $-12$.
 Which I read to mean that the computation is almost meaningless. 
 
 Turning to Ridge regression we see much smaller coefficients and much smaller variance of the $\beta_i$. 
@@ -435,15 +453,20 @@ While it has a worse $R^2$ score than the OLS model, its much more stable behavi
 
 For the terrain data I chose a picturesque mountain range just outside of Sydney called the Blue Mountains. 
 I again used cross validation to select the model with the smallest predicted error (code block 68), and I got Ridge regression for a third degree polynomial with a $\lambda$ parameter of $0.5$.
-Running statistical tests as above, I got the following.
+Running statistical tests as above, I got the results shown in Table \ref{tab:td}
 
+\begin{table} 
+\begin{center}
+\caption{Model selection for terrain data.}
+\label{tab:td}
 \begin{tabular}{l|cccc}
 Regression method & mean squared error & $R^2$ & bias$^2$ & model variance  \\ 
 \hline
 \hline 
 Ridge & 27383.656382 & 0.767798 & 24636.566560 & 5.116623 \\ 
 \end{tabular} 
-
+\end{center}
+\end{table}
 The first thing to note is the enormous mean squared error. 
 This number was expected to be bigger than for the Franke Function, from the simple fact that the terrain data function takes values in a much bigger range. 
 I also note that we have an almost respectable $R^2$ score of approximately $0.77$, nothing impressive but notably better than for the Franke Function. 
@@ -451,20 +474,28 @@ There is very little variance on the $\beta_i$'s except for the intercept, where
 \[
 	[745.8323202; 803.0143918]
 \]
-For a final test, I plotted a 500 by 500 corner of the map, and the same corner as predicted by the model in code block 76. 
+For a final test, I plotted a 500 by 500 corner of the map, and the same corner as predicted by the model in code block 76, see Figure \ref{fig:maps}.
+
+\begin{figure}[H]
+\caption{The Blue mountains and the Ridge regression prediction.}
+\label{fig:maps}
+\centering
+\includegraphics[scale=0.5]{bmreal.png}
+\includegraphics[scale=0.5]{bmpred.png}
+\end{figure}
+
 Looking at it, we can see that the model picks up the very bright spot in the lower left corner and sort of picks up the dark lines running along the X-axis around Y-coordinate 100--200. 
 In a way the predicted map looks like a very blurry version of the real map. 
 
 \section{Conclusion} \label{sec:conclusion}
 
-From the modelling of the Franke function and the terrain date, we see that the linear regression methods acts as the theory predicts.
+From the modelling of the Franke Function and the terrain date, we see that the linear regression methods acts as the theory predicts.
 The Ridge and Lasso regressions are more stable than the Ordinary Least Squares regression and Lasso is much more likely to set a given $\beta_i$ to $0$. 
 None of the linear regression methods are particularly well suited for these particular problems. 
 Hence other methods are needed if we want useful predictions. 
 
 %%%%%%%%%%%%%%
 %Bibliography
-\newpage
 \bibliographystyle{apalike}
 \bibliography{refs}	% expects file "refs.bib"
 %%%%%%%%%%%%%%
