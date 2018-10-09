@@ -1,0 +1,1530 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Code for project 1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Project 1 - code}\label{project-1---code}
+
+It is all meant to be run in order
+
+    \subsection{A whole heap of setup}\label{a-whole-heap-of-setup}
+
+    \subsubsection{Imports}\label{imports}
+
+These appear to be the standard imports
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{cm}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{ticker} \PY{k}{import} \PY{n}{LinearLocator}\PY{p}{,} \PY{n}{FormatStrFormatter}
+        \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{random}\PY{p}{,} \PY{n}{seed}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}\PY{p}{,} \PY{n}{Ridge}\PY{p}{,} \PY{n}{Lasso} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,} \PY{n}{r2\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{PolynomialFeatures}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+        \PY{k+kn}{from} \PY{n+nn}{imageio} \PY{k}{import} \PY{n}{imread}
+\end{Verbatim}
+
+
+    \subsubsection{The Franke Function}\label{the-franke-function}
+
+We define the Franke Function, and do it plot of it. All of that is from
+the project description.
+
+The only non-standard thing we do, is define a function Franke\_on\_row,
+which is just a wrapper to apply the Franke Function to a list with two
+elements.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Make data.}
+        \PY{n}{fx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+        \PY{n}{fy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+        \PY{n}{fx}\PY{p}{,} \PY{n}{fy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{fx}\PY{p}{,}\PY{n}{fy}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{FrankeFunction}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{n}{term1} \PY{o}{=} \PY{l+m+mf}{0.75}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.25}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.25}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{term2} \PY{o}{=} \PY{l+m+mf}{0.75}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{x}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{49.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{y}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{term3} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mf}{4.0} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.25}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{n}{term4} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{k}{return} \PY{n}{term1} \PY{o}{+} \PY{n}{term2} \PY{o}{+} \PY{n}{term3} \PY{o}{+} \PY{n}{term4}
+        
+        \PY{c+c1}{\PYZsh{} A wrapper to let us apply FrankeFunction to a list of the form row = [x, y]}
+        \PY{k}{def} \PY{n+nf}{Franke\PYZus{}on\PYZus{}row}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{FrankeFunction}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{fz} \PY{o}{=} \PY{n}{FrankeFunction}\PY{p}{(}\PY{n}{fx}\PY{p}{,} \PY{n}{fy}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the surface.}
+        \PY{n}{surf} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{fx}\PY{p}{,} \PY{n}{fy}\PY{p}{,} \PY{n}{fz}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{antialiased}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Customize the z axis.}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.10}\PY{p}{,} \PY{l+m+mf}{1.40}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}locator}\PY{p}{(}\PY{n}{LinearLocator}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FormatStrFormatter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}.02f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Add a color bar which maps values to colors.}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{n}{surf}\PY{p}{,} \PY{n}{shrink}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Regression methods}\label{regression-methods}
+
+We define the classes polynomialOLS, polynomialRidge, and
+polynomialLasso. Each will take a degree, and the later two also a
+parameter lamb. They each implement train and predict functions. The
+idea is that one initiates a polynomial method pm with a given degree,
+then we can simply pass a two-column matrix XY with x and y values to
+train and predict, the classes themselves will then call polymatrix to
+get a matrix with all the terms needed to get a polynomial of the given
+degree. The Ridge regression class also takes care to center the input.
+That is all just to make calling the functions easier.
+
+Each class also has plotfunc, coefficients and info methods.
+
+The plotfunc is simply a wrapper used to predict on a single pair of
+points (x,y). I use it because I had problems with applying predict when
+plotting.
+
+The coefficients methods returns a column vector consisting of the beta
+functions.
+
+The info method does some printing we use later to make nice output.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} We are only going to work with input in two dimensions}
+        \PY{c+c1}{\PYZsh{} and output in one.}
+        \PY{c+c1}{\PYZsh{} Hence all our code will be writting with this assumption }
+        
+        \PY{c+c1}{\PYZsh{} Given a matrix XY with two columns x,y return an array with columns x, y, x\PYZca{}2, xy, y\PYZca{}2, ... y\PYZca{}n }
+        \PY{k}{def} \PY{n+nf}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{n}{X} \PY{o}{=} \PY{n}{XY}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}
+            \PY{n}{Y} \PY{o}{=} \PY{n}{XY}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}
+            \PY{n}{ones} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+            \PY{n}{pl} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{k}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{Y}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{ones}\PY{p}{,} \PY{n}{pl}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} This is a class for doing the most basic OLS regression }
+        \PY{k}{class} \PY{n+nc}{myOLS} \PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} We have one class virable beta which has the coefficients for the linear regression}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} This method sets beta on the given training matrix xb with know values y.}
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{xb}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{xb}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Use our beta to predict on a (correctly formatted) matrix xb.}
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{xb}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{xb}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} This class is simply a wrapper for the myOLS class}
+        \PY{c+c1}{\PYZsh{} It simply takes care of transforming the raw input into proper polynomial input}
+        \PY{k}{class} \PY{n+nc}{polynomialOLS} \PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{polyOLS} \PY{o}{=} \PY{n}{myOLS}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree} \PY{o}{=} \PY{n}{n}
+            
+            \PY{c+c1}{\PYZsh{} Train our polynomial OLS.}
+            \PY{c+c1}{\PYZsh{} We take matrix XY with two columns x,y and given zs as output. }
+            \PY{c+c1}{\PYZsh{} First we use polymatrix to transform XY to matrix with rows 1, x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then we feed that as the training data to an ordinary OLS}
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{polyOLS}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{xb}\PY{p}{,}\PY{n}{z}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Predict our polynomial solution }
+            \PY{c+c1}{\PYZsh{} As in train we take a matrix XY with two columns x,y.  }
+            \PY{c+c1}{\PYZsh{} First we use polymatrix to transform XY to matrix with rows 1, x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then use that as input to predict on an ordinart OLS}
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{polyOLS}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xb}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} This is only used for plotting. }
+            \PY{c+c1}{\PYZsh{} It is just a wrapper function to predict the value a single (x,y) pair}
+            \PY{c+c1}{\PYZsh{} Given two numbers x,y it just applies predict to an array with x and y as columns}
+            \PY{k}{def} \PY{n+nf}{plotfunc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+            \PY{c+c1}{\PYZsh{} Prints the coefficients beta}
+            \PY{k}{def} \PY{n+nf}{coefficients}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{polyOLS}\PY{o}{.}\PY{n}{beta}
+        
+            \PY{c+c1}{\PYZsh{} A function to print some pretty information about this regression model  }
+            \PY{k}{def} \PY{n+nf}{info}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OLS regression, trying to fit a polynomial of degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)}
+        
+        \PY{k}{class} \PY{n+nc}{polynomialRidge} \PY{p}{:} 
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{lamb}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree} \PY{o}{=} \PY{n}{n}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lamb} \PY{o}{=} \PY{n}{lamb}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{intercept} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} takes a column or row vecter x, and returns x \PYZhy{} bar\PYZob{}x\PYZcb{},}
+            \PY{c+c1}{\PYZsh{} where bar\PYZob{}x\PYZcb{} is the avarage of the entries in x}
+            \PY{c+c1}{\PYZsh{} Also works on any size matrix, but that is not what we have in mind}
+            \PY{k}{def} \PY{n+nf}{center}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{)} \PY{p}{:}
+                \PY{k}{return} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Train our polynomial ridge regression.}
+            \PY{c+c1}{\PYZsh{} We take matrix XY with two columns x,y and given zs as output. }
+            \PY{c+c1}{\PYZsh{} First we transform XY to matrix with columns x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then we center each row.}
+            \PY{c+c1}{\PYZsh{} Finally wecompute beta according to formula from Hastings (3.44) }
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)} 
+                \PY{n}{xb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} removes the column of 1s }
+                \PY{n}{xb\PYZus{}centered} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{center}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{xb}\PY{p}{)} \PY{c+c1}{\PYZsh{} center each column}
+                \PY{n}{xbrows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{xb}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} number of rows in xb}
+                \PY{n}{b0} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{center}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta} \PY{o}{=} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{xb\PYZus{}centered}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb\PYZus{}centered}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lamb}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{xbrows}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb\PYZus{}centered}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{b0}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{intercept} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{z}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta}\PY{p}{)} 
+                
+            \PY{c+c1}{\PYZsh{} Predict our polynomial solution }
+            \PY{c+c1}{\PYZsh{} As in train we take a matrix XY with two columns x,y.  }
+            \PY{c+c1}{\PYZsh{} First we transform XY to matrix with columns x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then use beta and intecept to predict the value}
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)} 
+                \PY{n}{xb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} removes the column of 1s}
+                \PY{k}{return} \PY{n}{xb}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{intercept}
+            
+            \PY{c+c1}{\PYZsh{} This is only used for plotting. }
+            \PY{c+c1}{\PYZsh{} It is just a wrapper function to predict the value a single (x,y) pair}
+            \PY{c+c1}{\PYZsh{} Given two numbers x,y it just applies predict to an array with x and y as columns}
+            \PY{k}{def} \PY{n+nf}{plotfunc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+            \PY{c+c1}{\PYZsh{} Returns the coefficients beta (a long with intercept) as a column vector}
+            \PY{c+c1}{\PYZsh{} vstack puts the intercept ontop of the other betas}
+            \PY{k}{def} \PY{n+nf}{coefficients}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{intercept}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{beta}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} A function to print some pretty information about this regression model  }
+            \PY{k}{def} \PY{n+nf}{info}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ridge regression, trying to fit a polynomial of degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lambda = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lamb}\PY{p}{)}
+            
+        \PY{k}{class} \PY{n+nc}{polynomialLasso} \PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{lamb}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lasso} \PY{o}{=} \PY{n}{Lasso}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{n}{lamb}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree} \PY{o}{=} \PY{n}{n}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lamb} \PY{o}{=} \PY{n}{lamb}
+                
+            \PY{c+c1}{\PYZsh{} Train our polynomial lasso.}
+            \PY{c+c1}{\PYZsh{} We take matrix XY with two columns x,y and given zs as output. }
+            \PY{c+c1}{\PYZsh{} First we transform XY to matrix with columns x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then we center each row.}
+            \PY{c+c1}{\PYZsh{} Finally wecompute beta according to formula from Hastings (3.44) }
+            \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)} 
+                \PY{n}{xb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} removes the column of 1s }
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lasso}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} Predict our polynomial solution }
+            \PY{c+c1}{\PYZsh{} As in train we take a matrix XY with two columns x,y.  }
+            \PY{c+c1}{\PYZsh{} First we transform XY to matrix with columns x, y, x\PYZca{}2, xy, y\PYZca{}2 ...}
+            \PY{c+c1}{\PYZsh{} Then use beta and intecept to predict the value}
+            \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{XY}\PY{p}{)}\PY{p}{:}
+                \PY{n}{xb} \PY{o}{=} \PY{n}{polymatrix}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)} 
+                \PY{n}{xb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{xb}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} removes the column of 1s}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lasso}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xb}\PY{p}{)}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} This is only used for plotting. }
+            \PY{c+c1}{\PYZsh{} It is just a wrapper function to predict the value a single (x,y) pair}
+            \PY{c+c1}{\PYZsh{} Given two numbers x,y it just applies predict to an array with x and y as columns}
+            \PY{k}{def} \PY{n+nf}{plotfunc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+            \PY{c+c1}{\PYZsh{} Returns the coefficients (including intercept) as a column vector}
+            \PY{c+c1}{\PYZsh{} reshape(\PYZhy{}1,1) makes the array of coef\PYZus{} into a column vector}
+            \PY{c+c1}{\PYZsh{} we put intercept\PYZus{} on top of it.}
+            \PY{k}{def} \PY{n+nf}{coefficients}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} resha}
+                \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lasso}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lasso}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{info}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lasso regression, trying to fit a polynomial of degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{degree}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lambda = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lamb}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Test of regression
+functions}\label{test-of-regression-functions}
+
+We verify that the classes we build yield the same outcome as the
+build-in functions of sci-kit learn.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test of regression methods and polymatrix}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing polymatrix. Making first a random (4,2) array}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{test\PYZus{}XY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{test\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{Franke\PYZus{}on\PYZus{}row}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{test\PYZus{}XY}\PY{p}{)}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}print(test\PYZus{}XY)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{test\PYZus{}degree} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ the mean diffrence between polymatrix and PolynomialFeatures are}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{test\PYZus{}degree}\PY{p}{)}
+            \PY{n}{poly} \PY{o}{=} \PY{n}{PolynomialFeatures}\PY{p}{(}\PY{n}{test\PYZus{}degree}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{polymatrix}\PY{p}{(}\PY{n}{test\PYZus{}XY}\PY{p}{,} \PY{n}{test\PYZus{}degree}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{poly}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{test\PYZus{}XY}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing how my ols and ridge methods differ from the sci\PYZhy{}kit learn ones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{test\PYZus{}degree} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{We look at a polynomial of degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{test\PYZus{}degree}\PY{p}{)}
+            \PY{n}{poly} \PY{o}{=} \PY{n}{PolynomialFeatures}\PY{p}{(}\PY{n}{test\PYZus{}degree}\PY{p}{)}
+            \PY{n}{poly\PYZus{}XY} \PY{o}{=} \PY{n}{poly}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{test\PYZus{}XY}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} We remove the leading column of 1s}
+            \PY{c+c1}{\PYZsh{} This is done since we call teh fit functions without setting fit\PYZus{}intercept to false}
+            \PY{c+c1}{\PYZsh{} So in essence, the fit of OLS and more importantly Ridge makes sure to find the intercept on its own}
+            \PY{n}{poly\PYZus{}XY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{poly\PYZus{}XY}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} 
+            
+            
+            \PY{c+c1}{\PYZsh{} Setup \PYZdq{}my\PYZdq{} OLS regression}
+            \PY{n}{myols} \PY{o}{=} \PY{n}{polynomialOLS}\PY{p}{(}\PY{n}{test\PYZus{}degree}\PY{p}{)}
+            \PY{n}{myols}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{test\PYZus{}XY}\PY{p}{,} \PY{n}{test\PYZus{}z}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Setup sci\PYZhy{}kit learns OLS regression}
+            \PY{n}{scikit\PYZus{}ols} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+            \PY{n}{scikit\PYZus{}ols}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{poly\PYZus{}XY}\PY{p}{,} \PY{n}{test\PYZus{}z}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} make a column vector of betas for scikit\PYZus{}ols}
+            \PY{n}{skols\PYZus{}betas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{scikit\PYZus{}ols}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{n}{scikit\PYZus{}ols}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean difference of hand computed intercept and coefs for OLS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{myols}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{skols\PYZus{}betas}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Setup \PYZdq{}my\PYZdq{} ridge regression }
+            \PY{n}{myridge} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{n}{test\PYZus{}degree}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+            \PY{n}{myridge}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{test\PYZus{}XY}\PY{p}{,} \PY{n}{test\PYZus{}z}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Setup sci\PYZhy{}kit learns ridge regression}
+            \PY{n}{scikit\PYZus{}ridge} \PY{o}{=} \PY{n}{Ridge}\PY{p}{(}\PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+            \PY{n}{scikit\PYZus{}ridge}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{poly\PYZus{}XY}\PY{p}{,} \PY{n}{test\PYZus{}z}\PY{p}{)}
+            \PY{n}{skridge\PYZus{}betas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{scikit\PYZus{}ridge}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{,} \PY{n}{scikit\PYZus{}ridge}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean difference of hand computed intercept and coefs for Ridge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{myridge}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{skridge\PYZus{}betas}\PY{p}{)}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test of regression methods and polymatrix
+-------------------
+
+Testing polymatrix. Making first a random (4,2) array
+
+For degree 1 the mean diffrence between polymatrix and PolynomialFeatures are
+0.0
+
+For degree 2 the mean diffrence between polymatrix and PolynomialFeatures are
+0.0
+
+For degree 3 the mean diffrence between polymatrix and PolynomialFeatures are
+2.524344530066211e-19
+
+For degree 4 the mean diffrence between polymatrix and PolynomialFeatures are
+3.493005673427315e-19
+
+For degree 5 the mean diffrence between polymatrix and PolynomialFeatures are
+2.3215042611641024e-19
+
+-------------------
+
+Testing how my ols and ridge methods differ from the sci-kit learn ones
+
+We look at a polynomial of degree 1
+Mean difference of hand computed intercept and coefs for OLS
+5.181040781584064e-16
+Mean difference of hand computed intercept and coefs for Ridge
+3.700743415417188e-17
+We look at a polynomial of degree 2
+Mean difference of hand computed intercept and coefs for OLS
+-5.782411586589357e-16
+Mean difference of hand computed intercept and coefs for Ridge
+7.517135062566164e-17
+We look at a polynomial of degree 3
+Mean difference of hand computed intercept and coefs for OLS
+5.004885395010206e-14
+Mean difference of hand computed intercept and coefs for Ridge
+-4.163336342344337e-18
+We look at a polynomial of degree 4
+Mean difference of hand computed intercept and coefs for OLS
+-1.777851939740079e-12
+Mean difference of hand computed intercept and coefs for Ridge
+-3.7007434154171884e-18
+We look at a polynomial of degree 5
+Mean difference of hand computed intercept and coefs for OLS
+3.660379605239345e-11
+Mean difference of hand computed intercept and coefs for Ridge
+-5.683284530819253e-17
+
+    \end{Verbatim}
+
+    \subsubsection{Cross validation}\label{cross-validation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} This function does k\PYZhy{}fold cross validation }
+        \PY{c+c1}{\PYZsh{} It takes a k, a matrix XY with two columns of inputs, and corresponding true values z (all of appropirate sizes)}
+        \PY{c+c1}{\PYZsh{} It also takes a model which we assume have train, predict, and coefficients functions.}
+        \PY{c+c1}{\PYZsh{} Both should work on these matrices }
+        \PY{c+c1}{\PYZsh{} We return the expected error, and a list of computed coefficients for our model}
+        \PY{k}{def} \PY{n+nf}{cross\PYZus{}validation}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{model}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{sqdiffs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{clength} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} the length of the first column in XY}
+            \PY{n}{permutation} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{clength}\PY{p}{)} \PY{c+c1}{\PYZsh{} a permutation of the indexes of rows in XY}
+            \PY{n}{partitions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}split}\PY{p}{(}\PY{n}{permutation}\PY{p}{,} \PY{n}{k}\PY{p}{)} \PY{c+c1}{\PYZsh{} The permutation is devided in to k almost equally big groups}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{)} \PY{p}{:}
+                \PY{c+c1}{\PYZsh{} create a mask to pick everything but the elements in the i\PYZsq{}th partition}
+                \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{clength}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{bool}\PY{p}{)}
+                \PY{n}{mask}\PY{p}{[}\PY{n}{partitions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{c+c1}{\PYZsh{} now train on everything but the i\PYZsq{}th partition}
+                \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{z}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} make the mask the picks only the elements of the i\PYZsq{}th partition}
+                \PY{n}{notmask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{invert}\PY{p}{(}\PY{n}{mask}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} update the sqdiffs of predicted values and the true values in the i\PYZsq{}th partition  }
+                \PY{n}{zpredict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{n}{notmask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{n}{sqdiffs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{zpredict} \PY{o}{\PYZhy{}} \PY{n}{z}\PY{p}{[}\PY{n}{notmask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            
+            \PY{n}{pred\PYZus{}mse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{sqdiffs}\PY{p}{)}
+            \PY{k}{return} \PY{n}{pred\PYZus{}mse}   
+\end{Verbatim}
+
+
+    \subsubsection{Statitistics functions}\label{statitistics-functions}
+
+Just a small collection of statistics functions we will use to evaluate
+the preformance of our models
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{MSE}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{r2d2score}\PY{p}{(}\PY{n}{ytrue}\PY{p}{,} \PY{n}{ypredict}\PY{p}{)}\PY{p}{:}
+            \PY{n}{truemean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{ytrue}\PY{p}{)}
+            \PY{k}{return} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{ytrue}\PY{o}{\PYZhy{}}\PY{n}{ypredict}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{ytrue}\PY{o}{\PYZhy{}}\PY{n}{truemean}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} variance of a column of row vector x}
+        \PY{k}{def} \PY{n+nf}{variance}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Given input data XY, z, and a model.}
+        \PY{c+c1}{\PYZsh{} We first train the model on XY, z.}
+        \PY{c+c1}{\PYZsh{} Then we compute the MSE and R2 score of the prediction vs the true values}
+        \PY{c+c1}{\PYZsh{} After thinking it over, this just seems boring, so it wont be used }
+        \PY{k}{def} \PY{n+nf}{basic\PYZus{}tests}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{model}\PY{p}{)} \PY{p}{:}
+            \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+            \PY{n}{zpredict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XY}\PY{p}{)}
+            \PY{n}{mse} \PY{o}{=} \PY{n}{MSE}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{n}{zpredict}\PY{p}{)}
+            \PY{n}{r2} \PY{o}{=} \PY{n}{r2d2score}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{n}{zpredict}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{mse}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 scrore = }\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}\PY{k}{r2})
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+            
+            
+        \PY{c+c1}{\PYZsh{} Given a model already trained on some data, and some new data XY, z }
+        \PY{c+c1}{\PYZsh{} Compute MSE and R2 scores of the models prediction of the newdata against it true new zs}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{newXY}\PY{p}{,} \PY{n}{newz}\PY{p}{,} \PY{n}{model}\PY{p}{)}\PY{p}{:}
+            \PY{n}{zpredict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{newXY}\PY{p}{)}
+            \PY{n}{mse} \PY{o}{=} \PY{n}{MSE}\PY{p}{(}\PY{n}{newz}\PY{p}{,} \PY{n}{zpredict}\PY{p}{)}
+            \PY{n}{r2} \PY{o}{=} \PY{n}{r2d2score}\PY{p}{(}\PY{n}{newz}\PY{p}{,} \PY{n}{zpredict}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{mse}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 scrore = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{r2}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Statistics functions
+test}\label{statistics-functions-test}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing the basic statistics functions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} make two lists of random numbers}
+        \PY{c+c1}{\PYZsh{} we need the ravel or the build in r2\PYZus{}score behaves in an odd way}
+        \PY{n}{xs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}
+        \PY{n}{ys} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}
+        \PY{n}{mse\PYZus{}diff} \PY{o}{=} \PY{n}{MSE}\PY{p}{(}\PY{n}{xs}\PY{p}{,}\PY{n}{ys}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{xs}\PY{p}{,}\PY{n}{ys}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MSE difference between mine and sci\PYZhy{}kit learns: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{mse\PYZus{}diff}\PY{p}{)}
+        \PY{n}{r2\PYZus{}diff} \PY{o}{=} \PY{n}{r2d2score}\PY{p}{(}\PY{n}{xs}\PY{p}{,}\PY{n}{ys}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{xs}\PY{p}{,}\PY{n}{ys}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2 difference between mine and sci\PYZhy{}kit learns: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{r2\PYZus{}diff}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Testing the basic statistics functions
+
+MSE difference between mine and sci-kit learns: 0.000000 
+R2 difference between mine and sci-kit learns: 0.000000 
+
+    \end{Verbatim}
+
+    \subsubsection{BV estimate and confidence
+intervals}\label{bv-estimate-and-confidence-intervals}
+
+Functions to estimate the bias and variance and confidence intervals of
+a given model. They are just minor modifications of the confidence
+interval code, and really one should probably do both (or all 3) in one
+go.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} This function tries to estimate the variance and bias of our model  }
+        \PY{c+c1}{\PYZsh{} It takes a k, a matrix XY with two columns of inputs, and corresponding true values z (all of appropirate sizes)}
+        \PY{c+c1}{\PYZsh{} It also takes a model which we assume have train, predict, and coefficients functions.}
+        \PY{c+c1}{\PYZsh{} We return the variance and bias of computing the model on k subsets of XY}
+        \PY{c+c1}{\PYZsh{} when compared to a single \PYZdq{}true\PYZdq{} set}
+        \PY{k}{def} \PY{n+nf}{BV\PYZus{}estimate}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{model}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{clength} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} the length of the first column in XY}
+            \PY{n}{permutation} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{clength}\PY{p}{)} \PY{c+c1}{\PYZsh{} a permutation of the indexes of rows in XY}
+            \PY{n}{partitions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}split}\PY{p}{(}\PY{n}{permutation}\PY{p}{,} \PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} The permutation is devided in to k+1 almost equally big groups}
+            \PY{n}{preds\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} this will be a list of the predicted out comes}
+            
+            \PY{c+c1}{\PYZsh{} create a mask to pick everything in the k\PYZsq{}th partition}
+            \PY{c+c1}{\PYZsh{} this is the partition we will compare aginst}
+            \PY{n}{fixed\PYZus{}mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{clength}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{bool}\PY{p}{)}
+            \PY{n}{fixed\PYZus{}mask}\PY{p}{[}\PY{n}{partitions}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+               
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{)} \PY{p}{:}
+                \PY{c+c1}{\PYZsh{} create a mask to pick everything but the i\PYZsq{}th partition}
+                \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{clength}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{bool}\PY{p}{)}
+                \PY{n}{mask}\PY{p}{[}\PY{n}{partitions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{mask}\PY{p}{[}\PY{n}{partitions}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{c+c1}{\PYZsh{} now train on the i\PYZsq{}th partition}
+                \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{z}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} now predict what will happen on the fixed set}
+                \PY{n}{zpredict} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{n}{fixed\PYZus{}mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{n}{preds\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{zpredict}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} transform from list of column vectors to a single matrix}
+            \PY{c+c1}{\PYZsh{} each row contains the prediction of a single xy point}
+            \PY{n}{preds\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{preds\PYZus{}list}\PY{p}{)}
+            
+            \PY{n}{vari} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{variance}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{preds\PYZus{}matrix}\PY{p}{)}\PY{p}{)}
+            \PY{n}{bias} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{preds\PYZus{}matrix} \PY{o}{\PYZhy{}} \PY{n}{z}\PY{p}{[}\PY{n}{fixed\PYZus{}mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}mse = np.mean(np.power(preds\PYZus{}matrix \PYZhy{} z[fixed\PYZus{}mask, :], 2))}
+            
+            \PY{k}{return} \PY{n}{bias}\PY{p}{,} \PY{n}{vari}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}usage example:}
+        \PY{c+c1}{\PYZsh{}pRidge = polynomialOLS(4)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}Using 9 folds to predict variance and bias for a polynomial of degree \PYZpc{}i.\PYZdq{} \PYZpc{} 2)}
+        \PY{c+c1}{\PYZsh{}print(BV\PYZus{}estimate(9, XY, z, pRidge))}
+        
+        \PY{c+c1}{\PYZsh{} This function estimates the variance of the betas  }
+        \PY{c+c1}{\PYZsh{} It takes a k, a matrix XY with two columns of inputs, and corresponding true values z (all of appropirate sizes)}
+        \PY{c+c1}{\PYZsh{} It also takes a model which we assume have train, predict, and coefficients functions.}
+        \PY{c+c1}{\PYZsh{} We return the variance the the betas when computing the model on k subsets of XY}
+        \PY{k}{def} \PY{n+nf}{beta\PYZus{}variance}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{model}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{clength} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} the length of the first column in XY}
+            \PY{n}{permutation} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{clength}\PY{p}{)} \PY{c+c1}{\PYZsh{} a permutation of the indexes of rows in XY}
+            \PY{n}{partitions} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array\PYZus{}split}\PY{p}{(}\PY{n}{permutation}\PY{p}{,} \PY{n}{k}\PY{p}{)} \PY{c+c1}{\PYZsh{} The permutation is devided in to k almost equally big groups}
+            \PY{n}{beta\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} this will be a list of the betas for each training session}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{)} \PY{p}{:}
+                \PY{c+c1}{\PYZsh{} create a mask to pick everything but the elements in the i\PYZsq{}th partition}
+                \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{clength}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{bool}\PY{p}{)}
+                \PY{n}{mask}\PY{p}{[}\PY{n}{partitions}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{c+c1}{\PYZsh{} now train on everything but the i\PYZsq{}th partition}
+                \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{z}\PY{p}{[}\PY{n}{mask}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+                \PY{n}{beta\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} transform from list of column vectors to a single matrix}
+            \PY{c+c1}{\PYZsh{} each row contains the \PYZdq{}same beta\PYZdq{} computed from different training session}
+            \PY{n}{beta\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{n}{beta\PYZus{}list}\PY{p}{)}
+            
+            \PY{n}{variances} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{variance}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{beta\PYZus{}matrix}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{variances}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}usage example}
+        \PY{c+c1}{\PYZsh{}pRidge = polynomialOLS(4)}
+        \PY{c+c1}{\PYZsh{}print(\PYZdq{}Using 10 folds to compute variances of betas for a polynomial of degree \PYZpc{}i.\PYZdq{} \PYZpc{} 2)}
+        \PY{c+c1}{\PYZsh{}print(beta\PYZus{}variance(10, XY, z, pRidge))}
+\end{Verbatim}
+
+
+    \subsection{Acutally working with the models or solving parts a,b,
+c}\label{acutally-working-with-the-models-or-solving-parts-ab-c}
+
+    \subsubsection{Data for all our test}\label{data-for-all-our-test}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} Setup input data. }
+         \PY{c+c1}{\PYZsh{} We make numberofpoints points}
+         \PY{c+c1}{\PYZsh{} the x\PYZsq{}s and y\PYZsq{}s are chosen randomly }
+         \PY{c+c1}{\PYZsh{} the z\PYZsq{}s according to the fomula and with some noise}
+         \PY{n}{number\PYZus{}of\PYZus{}points} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{noise} \PY{o}{=} \PY{l+m+mf}{0.2}
+         \PY{n}{XY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{n}{number\PYZus{}of\PYZus{}points}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)} \PY{c+c1}{\PYZsh{} a matrix of random numbers with 2 columns of length numberofpoints }
+         
+         \PY{c+c1}{\PYZsh{} we have to flip the normal dist array to get the right dimensions }
+         \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{Franke\PYZus{}on\PYZus{}row}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{XY}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{noise}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{number\PYZus{}of\PYZus{}points}\PY{p}{)}\PY{p}{]} 
+         
+         \PY{c+c1}{\PYZsh{} Now we make some \PYZdq{}clean\PYZdq{} data }
+         \PY{c+c1}{\PYZsh{} Models will never be trained on this, only tested against it }
+         \PY{n}{cleanXY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)} 
+         \PY{n}{cleanz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{Franke\PYZus{}on\PYZus{}row}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cleanXY}\PY{p}{)}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{noise}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]} 
+\end{Verbatim}
+
+
+    \subsubsection{A, OLS}\label{a-ols}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing OLS methods for polynomial of degrees 1,2,3,4, and 5.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First we use 10 fold cross validation to decide which model is best.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{n}{pOLS} \PY{o}{=} \PY{n}{polynomialOLS}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{pOLS}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+             \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{pOLS}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The predicted error is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{cv}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing 5 degree polynomial model against new data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{} When I ran this to lowest predicted error came from the polynomial of degree 5}
+         \PY{c+c1}{\PYZsh{} so we will go with that model  }
+         
+         \PY{c+c1}{\PYZsh{} We test the actual statistics against the unseen (clean) data}
+         \PY{n}{bestOLS} \PY{o}{=} \PY{n}{polynomialOLS}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{bestOLS}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The coefficients for our best OLS model is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bestOLS}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{cleanXY}\PY{p}{,} \PY{n}{cleanz}\PY{p}{,} \PY{n}{bestOLS}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now we compute the bias and variance of our model}
+         \PY{c+c1}{\PYZsh{} and esitamte the variance of the parameters beta}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 9 folds to predict variance and bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{b}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{BV\PYZus{}estimate}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestOLS}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The bias is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The variance is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{v}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 10 folds to compute variances of betas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{beta\PYZus{}variance}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestOLS}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Testing OLS methods for polynomial of degrees 1,2,3,4, and 5.
+
+First we use 10 fold cross validation to decide which model is best.
+
+OLS regression, trying to fit a polynomial of degree 1 
+The predicted error is 0.062884
+
+OLS regression, trying to fit a polynomial of degree 2 
+The predicted error is 0.058462
+
+OLS regression, trying to fit a polynomial of degree 3 
+The predicted error is 0.049181
+
+OLS regression, trying to fit a polynomial of degree 4 
+The predicted error is 0.046228
+
+OLS regression, trying to fit a polynomial of degree 5 
+The predicted error is 0.044361
+
+-------------
+
+Testing 5 degree polynomial model against new data
+The coefficients for our best OLS model is:
+[[  0.50487456]
+ [  6.84139196]
+ [  3.40447963]
+ [-28.83003238]
+ [-13.51823062]
+ [ -8.49877932]
+ [ 34.9506793 ]
+ [ 36.27449647]
+ [ 26.08048924]
+ [ -9.02317215]
+ [ -8.29829456]
+ [-47.10130772]
+ [ -3.18784026]
+ [-41.11659721]
+ [ 32.0059086 ]
+ [ -5.18824459]
+ [ 19.65607878]
+ [  3.94561365]
+ [ -1.70731701]
+ [ 21.06836119]
+ [-18.13575605]]
+OLS regression, trying to fit a polynomial of degree 5 
+MSE = 0.046539
+R2 scrore = 0.636927
+----------------
+
+Using 9 folds to predict variance and bias
+The bias is 0.043213
+The variance is 0.000132
+
+Using 10 folds to compute variances of betas
+[1.33555253e-03 2.37302168e-01 1.69367710e-01 8.30320758e+00
+ 1.61226390e+00 3.36708078e+00 4.22657606e+01 4.71033533e+00
+ 1.22514595e+01 1.76142175e+01 4.01009946e+01 1.26645999e+01
+ 7.45089345e+00 1.43587585e+01 2.26653797e+01 5.09400433e+00
+ 3.50051075e+00 1.36496341e+00 2.68100217e+00 2.12393538e+00
+ 3.97723740e+00]
+
+    \end{Verbatim}
+
+    \subsubsection{A - a plot}\label{a---a-plot}
+
+We do a plot of our predicted model - franke function. If this had been
+a great model we should have seen a very flat plot, we don't quite
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} retrain model as it has been modified by BV and variance computations}
+         \PY{n}{bestOLS}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Do a plot of the best model \PYZhy{} franke}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Make plot points .}
+         \PY{n}{xpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{ypoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{xm}\PY{p}{,} \PY{n}{ym} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{xpoints}\PY{p}{,}\PY{n}{ypoints}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the real and predicted surfaces.}
+         \PY{n}{diffsurf} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{bestOLS}\PY{o}{.}\PY{n}{plotfunc}\PY{p}{)}\PY{p}{(}\PY{n}{xm}\PY{p}{,}\PY{n}{ym}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{FrankeFunction}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{antialiased}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Customize the z axis.}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.50}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}locator}\PY{p}{(}\PY{n}{LinearLocator}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FormatStrFormatter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}.02f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add a color bar which maps values to colors.}
+         \PY{c+c1}{\PYZsh{}fig.colorbar(realsurf, shrink=0.5, aspect=5)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{B, ridge regression - model
+selection}\label{b-ridge-regression---model-selection}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing Ridge methods for polynomial of degrees 1,2,3,4, and 5.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First we use 10 fold cross validation to decide which model is best.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Since printing out all the results of cross validation with different lambdas get tedious to read}
+         \PY{c+c1}{\PYZsh{} we make a list of cv values and corresponding degrees and lambdas. }
+         \PY{c+c1}{\PYZsh{} Then we can just sort by the cv value to pick the best model}
+         \PY{n}{cv\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} 
+                 \PY{n}{pRidge} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+                 \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{pRidge}\PY{p}{)}
+                 \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{tup}\PY{p}{:} \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}sort the list by the cv value}
+         
+         \PY{n}{best\PYZus{}tup} \PY{o}{=} \PY{n}{cv\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best model had a degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ polynomial and a lambda of }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It had a predicted error of }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} NOTE: Since this is not entirely deterministic, we some times get different answers.}
+         \PY{c+c1}{\PYZsh{} Mostly I get a degree 4 polynomial with a lambda of 0.1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Testing Ridge methods for polynomial of degrees 1,2,3,4, and 5.
+
+First we use 10 fold cross validation to decide which model is best.
+
+The best model had a degree 5 polynomial and a lambda of 0.100000 
+It had a predicted error of 0.049839
+
+    \end{Verbatim}
+
+    \subsubsection{B - working with chosen
+model}\label{b---working-with-chosen-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} We will work with a degree 5 polynomial and a lambda of 0.1}
+         \PY{c+c1}{\PYZsh{} We test the actual statistics against the unseen (clean) data}
+         \PY{n}{bestRidge} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{bestRidge}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The coefficients for our best Ridge model is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bestRidge}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{cleanXY}\PY{p}{,} \PY{n}{cleanz}\PY{p}{,} \PY{n}{bestRidge}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now we compute the bias and variance of our model}
+         \PY{c+c1}{\PYZsh{} and esitamte the variance of the parameters beta}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 9 folds to predict variance and bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{b}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{BV\PYZus{}estimate}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestRidge}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The bias is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The variance is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{v}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 10 folds to compute variances of betas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{beta\PYZus{}variance}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestRidge}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The coefficients for our best Ridge model is:
+[[ 1.06612447]
+ [-0.43069641]
+ [ 0.10905763]
+ [-1.5575589 ]
+ [ 0.99764565]
+ [-2.0988343 ]
+ [ 0.70765274]
+ [ 0.73417389]
+ [-0.66134346]
+ [-0.28112356]
+ [ 0.89019451]
+ [ 0.6225893 ]
+ [-0.21970549]
+ [-0.32754434]
+ [ 0.87460214]
+ [-0.6857009 ]
+ [-0.22535477]
+ [-0.26390879]
+ [-0.08609822]
+ [ 0.23636058]
+ [ 0.76602987]]
+Ridge regression, trying to fit a polynomial of degree 5 
+Lambda = 0.1000
+MSE = 0.058986
+R2 scrore = 0.539831
+----------------
+
+Using 9 folds to predict variance and bias
+The bias is 0.054887
+The variance is 0.000056
+
+Using 10 folds to compute variances of betas
+[0.00033641 0.00409355 0.00262426 0.00327892 0.00884094 0.00301148
+ 0.00212812 0.00403362 0.0044825  0.00108847 0.001235   0.00170429
+ 0.00141348 0.00185033 0.00048559 0.00107178 0.00369705 0.00535533
+ 0.00346365 0.00359964 0.00189097]
+
+    \end{Verbatim}
+
+    \subsubsection{B - the plot}\label{b---the-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} retrain model as it has been modified by BV and variance computations}
+         \PY{n}{bestRidge}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Do a plot of the best model \PYZhy{} franke}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Make plot points .}
+         \PY{n}{xpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{ypoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{xm}\PY{p}{,} \PY{n}{ym} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{xpoints}\PY{p}{,}\PY{n}{ypoints}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the real and predicted surfaces.}
+         \PY{n}{diffsurf} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{bestRidge}\PY{o}{.}\PY{n}{plotfunc}\PY{p}{)}\PY{p}{(}\PY{n}{xm}\PY{p}{,}\PY{n}{ym}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{FrankeFunction}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{antialiased}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Customize the z axis.}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.50}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}locator}\PY{p}{(}\PY{n}{LinearLocator}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FormatStrFormatter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}.02f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add a color bar which maps values to colors.}
+         \PY{c+c1}{\PYZsh{}fig.colorbar(realsurf, shrink=0.5, aspect=5)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{C, lasso regression - model
+selection}\label{c-lasso-regression---model-selection}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Testing Lasso methods for polynomial of degrees 1,2,3,4, and 5.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{First we use 10 fold cross validation to decide which model is best.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Since printing out all the results of cross validation with different lambdas get tedious to read}
+         \PY{c+c1}{\PYZsh{} we make a list of cv values and corresponding degrees and lambdas. }
+         \PY{c+c1}{\PYZsh{} Then we can just sort by the cv value to pick the best model}
+         \PY{n}{cv\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} 
+                 \PY{n}{pLasso} \PY{o}{=} \PY{n}{polynomialLasso}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+                 \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{pLasso}\PY{p}{)}
+                 \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{n}{cv}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{tup}\PY{p}{:} \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}sort the list by the cv value}
+         
+         \PY{n}{best\PYZus{}tup} \PY{o}{=} \PY{n}{cv\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The best model had a degree }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ polynomial and a lambda of }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{It had a predicted error of }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{best\PYZus{}tup}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} NOTE: Since this is not entirely deterministic, we sometimes get different answers.}
+         \PY{c+c1}{\PYZsh{} In fact it seems incredibly unstable.}
+         \PY{c+c1}{\PYZsh{} I assume a big part of this is that the lasso models sets almost all betas to zero}
+         \PY{c+c1}{\PYZsh{} When I did it, I got a degree 2 polynomial with a lambda of 0.2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Testing Lasso methods for polynomial of degrees 1,2,3,4, and 5.
+
+First we use 10 fold cross validation to decide which model is best.
+
+The best model had a degree 4 polynomial and a lambda of 0.100000 
+It had a predicted error of 0.124234
+
+    \end{Verbatim}
+
+    \subsubsection{C - working with chosen
+model}\label{c---working-with-chosen-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} We will work with a degree 5 polynomial and a lambda of 0.1}
+         \PY{c+c1}{\PYZsh{} We test the actual statistics against the unseen (clean) data}
+         \PY{n}{bestLasso} \PY{o}{=} \PY{n}{polynomialLasso}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{n}{bestLasso}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The coefficients for our best Lasso model is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bestLasso}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{cleanXY}\PY{p}{,} \PY{n}{cleanz}\PY{p}{,} \PY{n}{bestLasso}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now we compute the bias and variance of our model}
+         \PY{c+c1}{\PYZsh{} and esitamte the variance of the parameters beta}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 9 folds to predict variance and bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{b}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{BV\PYZus{}estimate}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestLasso}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The bias is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The variance is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{v}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 10 folds to compute variances of betas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{beta\PYZus{}variance}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{bestLasso}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The coefficients for our best Lasso model is:
+[[ 0.39662301]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]
+ [-0.        ]]
+Lasso regression, trying to fit a polynomial of degree 4 
+Lambda = 0.1000
+MSE = 0.130758
+R2 scrore = -0.020091
+----------------
+
+Using 9 folds to predict variance and bias
+The bias is 0.128723
+The variance is 0.000007
+
+Using 10 folds to compute variances of betas
+[2.51423352e-05 0.00000000e+00 0.00000000e+00 0.00000000e+00
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
+ 0.00000000e+00 0.00000000e+00 0.00000000e+00]
+
+    \end{Verbatim}
+
+    \subsubsection{C - the plot}\label{c---the-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} retrain model as it has been modified by BV and variance computations}
+         \PY{n}{bestLasso}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{XY}\PY{p}{,} \PY{n}{z}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Do a plot of the best model \PYZhy{} franke}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Make plot points .}
+         \PY{n}{xpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{ypoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{xm}\PY{p}{,} \PY{n}{ym} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{xpoints}\PY{p}{,}\PY{n}{ypoints}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the real and predicted surfaces.}
+         \PY{n}{diffsurf} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{vectorize}\PY{p}{(}\PY{n}{bestLasso}\PY{o}{.}\PY{n}{plotfunc}\PY{p}{)}\PY{p}{(}\PY{n}{xm}\PY{p}{,}\PY{n}{ym}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{FrankeFunction}\PY{p}{(}\PY{n}{xm}\PY{p}{,} \PY{n}{ym}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{coolwarm}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{antialiased}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Customize the z axis.}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}zlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.50}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}locator}\PY{p}{(}\PY{n}{LinearLocator}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}major\PYZus{}formatter}\PY{p}{(}\PY{n}{FormatStrFormatter}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}.02f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add a color bar which maps values to colors.}
+         \PY{c+c1}{\PYZsh{}fig.colorbar(realsurf, shrink=0.5, aspect=5)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Parts d and e}\label{parts-d-and-e}
+
+    \subsubsection{Loading Tarain data (part
+d)}\label{loading-tarain-data-part-d}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} I got my tarrain data by searching for blue mountains on earthexplorer}
+         \PY{c+c1}{\PYZsh{} Used Blue Mountains, New South Wales, Australia \PYZhy{}33.4100 150.3037}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} Load the terrain}
+         \PY{n}{terrain1} \PY{o}{=} \PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s34\PYZus{}e150\PYZus{}1arc\PYZus{}v3.tif}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Show the terrain}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Blue Mountains}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{terrain1}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{terrain\PYZus{}array} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{terrain1}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{terrain\PYZus{}array}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+(3601, 3601)
+
+    \end{Verbatim}
+
+    \subsection{Terrain analysis (part e) - model
+selection}\label{terrain-analysis-part-e---model-selection}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k}{def} \PY{n+nf}{terrain\PYZus{}function}\PY{p}{(}\PY{n}{row}\PY{p}{)} \PY{p}{:}
+             \PY{k}{return} \PY{n}{terrain\PYZus{}array}\PY{p}{[}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Setup input data. }
+         \PY{c+c1}{\PYZsh{} We pick a 1000 (x,y) integer points at random}
+         \PY{c+c1}{\PYZsh{} the z\PYZsq{}s according to the fomula and with some noise}
+         \PY{n}{tnumberofpoints} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{tnoise} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n}{tXY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{3600}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{tnumberofpoints}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{tz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{terrain\PYZus{}function}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{tXY}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now we make some \PYZdq{}clean\PYZdq{} data }
+         \PY{c+c1}{\PYZsh{} Models will never be trained on this, only tested against it }
+         \PY{n}{ctXY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{3600}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ctz} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{terrain\PYZus{}function}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ctXY}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{we do cross fold validation to pick the best model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{cv\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}first we try the OLS models}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{n}{pOLS} \PY{o}{=} \PY{n}{polynomialOLS}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{,} \PY{n}{pRidge}\PY{p}{)}
+             \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{cv}\PY{p}{,}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OLS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} then we try Ridge}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} 
+                 \PY{n}{pRidge} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+                 \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{,} \PY{n}{pRidge}\PY{p}{)}
+                 \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{cv}\PY{p}{,}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ridge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} then we try Ridge}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)} \PY{p}{:}
+             \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{p}{:} 
+                 \PY{n}{pLasso} \PY{o}{=} \PY{n}{polynomialLasso}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+                 \PY{n}{cv} \PY{o}{=} \PY{n}{cross\PYZus{}validation}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{,} \PY{n}{pLasso}\PY{p}{)}
+                 \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{cv}\PY{p}{,}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lasso}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                            
+         \PY{n}{cv\PYZus{}list}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{tup}\PY{p}{:} \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}sort the list by the cv value}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cv\PYZus{}list}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Again the results are not exactly fixed, but when I ran it, I got }
+         \PY{c+c1}{\PYZsh{} Ridge with degree 3 with lambda 0.2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+we do cross fold validation to pick the best model
+(27589.21792591468, ('Ridge', 3, 0.5))
+
+    \end{Verbatim}
+
+    \subsubsection{Working with chosen
+model}\label{working-with-chosen-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{c+c1}{\PYZsh{} We will work with a degree 3 polynomial and a lambda of 0.5}
+         \PY{c+c1}{\PYZsh{} We test the actual statistics against the unseen (clean) data}
+         \PY{n}{tmodel} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{tmodel}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The coefficients for our best model is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tmodel}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{ctXY}\PY{p}{,} \PY{n}{ctz}\PY{p}{,} \PY{n}{tmodel}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Now we compute the bias and variance of our model}
+         \PY{c+c1}{\PYZsh{} and esitamte the variance of the parameters beta}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 9 folds to predict variance and bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{b}\PY{p}{,} \PY{n}{v} \PY{o}{=} \PY{n}{BV\PYZus{}estimate}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{,} \PY{n}{tmodel}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The bias is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The variance is }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{v}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using 10 folds to compute variances of betas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{beta\PYZus{}variance}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{tXY}\PY{p}{,} \PY{n}{tz}\PY{p}{,} \PY{n}{tmodel}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The coefficients for our best model is:
+[[ 7.74423356e+02]
+ [ 2.63623576e-01]
+ [-2.41755778e-01]
+ [-6.09620512e-05]
+ [-4.45552817e-05]
+ [ 1.35688615e-05]
+ [ 6.49809862e-09]
+ [ 1.08423133e-08]
+ [ 4.29164295e-09]
+ [ 1.75566896e-10]]
+Ridge regression, trying to fit a polynomial of degree 3 
+Lambda = 0.5000
+MSE = 27383.656382
+R2 scrore = 0.767798
+----------------
+
+Using 9 folds to predict variance and bias
+The bias is 24636.566560
+The variance is 5.116623
+
+Using 10 folds to compute variances of betas
+[1.42955179e+01 3.32090863e-06 1.19403923e-05 2.00656719e-13
+ 2.76789538e-13 5.22608739e-13 3.33498950e-19 8.82435959e-20
+ 2.44105857e-19 8.89518016e-20]
+
+    \end{Verbatim}
+
+    \subsubsection{ploting terrain}\label{ploting-terrain}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{} Because of limited computing power of my laptop, }
+         \PY{c+c1}{\PYZsh{} we will restrict our selves to the 500 by 500 top corner of the map}
+         \PY{c+c1}{\PYZsh{} We train our model on some data from there, }
+         \PY{c+c1}{\PYZsh{} Then plot it and the real map}
+         
+         \PY{n}{restricted\PYZus{}XY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{499}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{restricted\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{terrain\PYZus{}function}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{restricted\PYZus{}XY}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{rc\PYZus{}XY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{499}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{rc\PYZus{}z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{apply\PYZus{}along\PYZus{}axis}\PY{p}{(}\PY{n}{terrain\PYZus{}function}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{rc\PYZus{}XY}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{tmodel} \PY{o}{=} \PY{n}{polynomialRidge}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{tmodel}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{restricted\PYZus{}XY}\PY{p}{,} \PY{n}{restricted\PYZus{}z}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plot a patch of our predicted landscape}
+         \PY{n}{my\PYZus{}terrain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{rint}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{[} \PY{n}{tmodel}\PY{o}{.}\PY{n}{plotfunc}\PY{p}{(}\PY{n}{tx}\PY{p}{,}\PY{n}{ty}\PY{p}{)} \PY{k}{for} \PY{n}{ty} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{tx} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Blue Mountains \PYZhy{} predicted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{my\PYZus{}terrain}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Show the terrain}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Blue Mountains}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{terrain\PYZus{}array}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The coefficients for our best model is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{tmodel}\PY{o}{.}\PY{n}{coefficients}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{test\PYZus{}against\PYZus{}new}\PY{p}{(}\PY{n}{rc\PYZus{}XY}\PY{p}{,} \PY{n}{rc\PYZus{}z}\PY{p}{,} \PY{n}{tmodel}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+The coefficients for our best model is:
+[[ 6.03684600e+02]
+ [-2.08347169e+00]
+ [-7.31907064e-03]
+ [ 1.40890570e-02]
+ [ 1.25217434e-03]
+ [-1.45402890e-03]
+ [-1.95642716e-05]
+ [ 1.83078371e-06]
+ [-7.47418512e-06]
+ [ 2.55957023e-06]]
+Ridge regression, trying to fit a polynomial of degree 3 
+Lambda = 0.5000
+MSE = 6684.622435
+R2 scrore = 0.713436
+----------------
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
