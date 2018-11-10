@@ -1,0 +1,150 @@
+\documentclass[parskip=half]{scrartcl}
+	
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{enumerate} % til \begin{enumerate}[(i)]
+\usepackage{enumitem} % til at styre lister globalt
+\usepackage{latexsym} % symboler
+\usepackage{amsthm} % til thm osv
+\usepackage{amssymb} % flere symbloer
+\usepackage{bm} % bold math symbols
+\usepackage{amsmath} % til pmatrix
+\usepackage[hyphens]{url} %til \url med bindestreger
+%\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\usepackage[pdftex]{graphicx}	
+\usepackage{scrlayer-scrpage} % page setup
+
+\usepackage{framed}
+\usepackage[cache=false]{minted} % for source code
+\usepackage{xcolor}
+%set page header
+\chead{FYS-STK4155 --- project 1}
+
+
+% List will number things using (a), (b), ...
+\setenumerate[1]{label={(\alph*)}} % Global setting
+
+% Title setup
+\title{Report for project 1}
+\date{\today}
+\author{Adam P W S{\o}rensen}
+
+%%%%%%%%%%%%
+% make chi subscripts low enough
+% from http://tex.stackexchange.com/questions/191551/greek-chis-subscript-expressions-how-to-make-it-smaller-or-offset-lower
+\let\latexchi\chi
+\makeatletter
+\renewcommand\chi{\@ifnextchar_\sub@chi\latexchi}
+\newcommand{\sub@chi}[2]{% #1 is _, #2 is the subscript
+  \@ifnextchar^{\subsup@chi{#2}}{\latexchi^{}_{#2}}%
+}
+\newcommand{\subsup@chi}[3]{% #1 is the subscript, #2 is ^, #3 is the superscript
+  \latexchi_{#1}^{#3}%
+}
+\makeatother
+
+\newcommand{\setof}[2]{\left\{ #1 \; \middle\vert \; #2 \right\}}
+
+\DeclareMathOperator{\cspan}{\overline{span}}
+
+% Theorem opsætning
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Standing Assumption}
+\newtheorem*{assumption*}{Standing Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+
+%%%%%%%%%%%%
+% notation short cuts
+\newcommand{\vect}[1]{{\bm{#1}}}
+\newcommand{\funcname}[1]{{\color{blue}{\texttt{#1}}}}
+\newcommand{\varname}[1]{\texttt{#1}}
+%%%%%%%%%%%%
+% bb letters
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+% cal letters
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\cZ}{\mathcal{Z}}
+% frak letters
+\newcommand{\fA}{\mathfrak{A}}
+
+
+%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%
+
+\maketitle
+
+\begin{abstract}
+What we did in project 2
+\end{abstract}
+
+
+\section{Introduction}
+
+
+\section{Methods} \label{sec:methods}
+ 
+\subsection{Linear regression} \label{sec:linear} 
+
+The three linear regression methods I have used - ordinary least squares regression, ridge regression, and lasso regression - are discussed in detail in the report for project 1. 
+So instead of describe how they works, let us zoom in on an import distinction between the way linear regression methods and neural networks were used for regression in this project.  
+
+Suppose we are preforming a biology experiment.
+For each test person we record their height and weight and perform a measurement of their cholesterol level. 
+Now the question is if height and weight somehow can predict cholesterol level. 
+Using linear regression we now have to decide on a model.
+Do we think cholesterol can be predicted simply by height and weight, or do we need more features like powers of height and weight and products of these powers. 
+Perhaps we could even consider using Body Mass Index (BMI) (it appears that there is in fact some correlation between BMI and cholesterol levels \cite{somepaper}).
+Each of these choices will lead to different models we have to choose between.
+But in each case the coefficients will give an indication of how much each future matters.
+This is a real strength of linear regression methods. 
+
+In contrast to this, as we will discuss below, when we do neural networks, we aim to find a network configuration that can be trained to give good predictions when we feed in height and weight. 
+And it can be quite daunting to review the networks weights and biases to deduce how each feature contributes.     
+
+\subsection{Logistic regression} \label{sec:logistic} 
+
+
+
+
+
+\subsection{Neural networks} \label{sec:neuralnet} 
+ 
+\section{1 dimensional Ising data (parts b and d)} \label{sec:1dising}
+
+\section{2 dimensional Ising data (parts c and e)} \label{sec:2dising}
+
+\section{Conclusions (part f)} \label{sec:conclusion}
+
+From the modelling of the Franke Function and the terrain date, we see that the linear regression methods acts as the theory predicts.
+The Ridge and Lasso regressions are more stable than the Ordinary Least Squares regression and Lasso is much more likely to set a given $\beta_i$ to $0$. 
+None of the linear regression methods are particularly well suited for these particular problems. 
+Hence other methods are needed if we want useful predictions. 
+
+%%%%%%%%%%%%%%
+%Bibliography
+\bibliographystyle{apalike}
+\bibliography{refs}	% expects file "refs.bib"
+%%%%%%%%%%%%%%
+
+
+\end{document}
