@@ -1,0 +1,30 @@
+\begin{thebibliography}{}
+
+\bibitem[Bland, 1998]{xor}
+Bland, R. (1998).
+\newblock Learning xor: exploring the space of a classic problem.
+\newblock \url{http://yen.cs.stir.ac.uk/~kjt/techreps/pdf/TR148.pdf}.
+
+\bibitem[Gostynski et~al., 2004]{somepaper}
+Gostynski, M., Gutzwiller, F., Kuulasmaa, K., Doring, A., Ferrario, M.,
+  Grafnetter, G., and Pajak, A. (2004).
+\newblock Analysis of the relationship between total cholesterol, age, body
+  mass index among males and females in the who monica project.
+\newblock {\em International Journal of Obesity volume}, 28.
+
+\bibitem[Hornik, 1991]{Hornik}
+Hornik, K. (1991).
+\newblock Approximation capabilities of multilayer feedforward networks.
+\newblock {\em Neural networks}, 4(2):251--257.
+
+\bibitem[Ng, 2018]{Ng}
+Ng, A. (2018).
+\newblock {CS}229 {L}ecture notes.
+\newblock \url{http://cs229.stanford.edu/notes/cs229-notes1.pdf}.
+
+\bibitem[Nielsen, 2015]{Nielsen}
+Nielsen, M.~A. (2015).
+\newblock {\em Neural Networks and Deep Learning}.
+\newblock Determination Press.
+
+\end{thebibliography}
